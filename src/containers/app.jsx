@@ -6,7 +6,7 @@ import Carousel from '../components/Carousel';
 import CarouselItem from '../components/Carousel-item';
 import Footer from '../components/footer';
 
-import '../assets/styles/app.scss';
+import '../assets/app.scss';
 
 
 
