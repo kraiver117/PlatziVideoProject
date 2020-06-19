@@ -14,8 +14,10 @@ const app = () => {
     return (
         <div className="App">
             <Header></Header>  
+
             <SearchBar></SearchBar>
-            <Categories>
+
+            <Categories title="Mi lista">
                 <Carousel >
                     <CarouselItem/>
                     <CarouselItem/>
@@ -23,6 +25,20 @@ const app = () => {
                     <CarouselItem/>
                 </Carousel>
             </Categories>
+            
+            <Categories title="Tendencias">
+                <Carousel >
+                    <CarouselItem/>
+                    <CarouselItem/>
+                </Carousel>
+            </Categories>
+
+            <Categories title="Originales de Platzi video">
+                <Carousel >
+                    <CarouselItem/>
+                </Carousel>
+            </Categories>
+
             <Footer></Footer>
         </div>
     );
