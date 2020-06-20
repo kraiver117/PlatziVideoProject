@@ -1,52 +1,48 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/Carousel-item';
 import Footer from '../components/footer';
-
+import useInitialState from '../hooks/useInitialState';
 import '../assets/app.scss';
 
-
+const API = 'http://localhost:3000/initalState';
 
 const app = () => {
-    const [videos, setVideos] = useState([]);
+    const initialState = useInitialState(API);
 
-    useEffect(() =>{
-    fetch('http://localhost:3000/initalState')
-        .then(response => response.json())
-        .then(data => setVideos(data));
-    }, []);
-
-    console.log(videos);
-
-    return (
+    return initialState.length === 0 ? <h1>Loading...</h1> :(
         <div className="App">
             <Header></Header>  
 
             <SearchBar></SearchBar>
 
-            <Categories title="Mi lista">
-                <Carousel >
-                    <CarouselItem/>
-                    <CarouselItem/>
-                    <CarouselItem/>
-                    <CarouselItem/>
-                </Carousel>
-            </Categories>
-            
+            {initialState.mylist?.length > 0 && 
+                <Categories title="Mi lista">
+                    <Carousel >
+                        {initialState.mylist?.map(item => 
+                            <CarouselItem key={item.id} {...item}/>
+                        )}
+                    </Carousel>
+                </Categories>
+            }
+
             <Categories title="Tendencias">
                 <Carousel >
-                    <CarouselItem/>
-                    <CarouselItem/>
+                    {initialState.trends?.map(item =>
+                         <CarouselItem key={item.id} {...item}/>
+                    )}
                 </Carousel>
             </Categories>
 
             <Categories title="Originales de Platzi video">
                 <Carousel >
-                    <CarouselItem/>
+                {initialState.originals?.map(item => 
+                            <CarouselItem key={item.id} {...item}/>
+                        )}
                 </Carousel>
             </Categories>
 
